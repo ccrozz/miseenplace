@@ -31,6 +31,13 @@ export default function Home() {
   }, []);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [navSolid, setNavSolid] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setNavSolid(window.scrollY > window.innerHeight * 0.4);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
@@ -38,6 +45,11 @@ export default function Home() {
         .nav {
           position: fixed; top: 0; left: 0; right: 0; z-index: 100;
           padding: 1.25rem 2rem; display: flex; justify-content: center; align-items: center;
+          transition: background 0.4s ease, backdrop-filter 0.4s ease;
+        }
+        .nav--solid {
+          background: rgba(28,28,24,0.92);
+          backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         }
         .nav__top {
           font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 500;
@@ -265,7 +277,7 @@ export default function Home() {
         }
       `}</style>
 
-      <nav className="nav">
+      <nav className={`nav${navSolid ? " nav--solid" : ""}`}>
         <div style={{ textAlign: "center" }}>
           <div className="nav__top">Mise en Place</div>
           <div className="nav__divider" />
