@@ -27,6 +27,19 @@ export const metadata: Metadata = {
   title: "Mise en Place Golf",
   description:
     "Everything in its place. The chef polo, reimagined for the course.",
+  openGraph: {
+    title: "Mise en Place Golf",
+    description:
+      "Everything in its place. The chef polo, reimagined for the course.",
+    images: [{ url: "/images/golf-action-bw.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mise en Place Golf",
+    description:
+      "Everything in its place. The chef polo, reimagined for the course.",
+    images: ["/images/golf-action-bw.png"],
+  },
 };
 
 export default function RootLayout({
