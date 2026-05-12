@@ -3,14 +3,15 @@
 import { useState, useRef, useEffect } from "react";
 
 function useCountdown(target: Date) {
-  const [now, setNow] = useState(new Date());
+  const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
+    setNow(new Date());
     const id = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(id);
   }, []);
 
-  const diff = Math.max(0, target.getTime() - now.getTime());
+  const diff = now ? Math.max(0, target.getTime() - now.getTime()) : 0;
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
@@ -34,7 +35,7 @@ export default function Home() {
   const [navSolid, setNavSolid] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setNavSolid(window.scrollY > window.innerHeight * 0.4);
+    const onScroll = () => setNavSolid(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -44,8 +45,9 @@ export default function Home() {
       <style>{`
         .nav {
           position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-          padding: 1.25rem 2rem; display: flex; justify-content: center; align-items: center;
-          transition: background 0.4s ease, backdrop-filter 0.4s ease;
+          padding: calc(1.25rem + env(safe-area-inset-top, 0px)) 2rem 1.25rem;
+          display: flex; justify-content: center; align-items: center;
+          transition: background 0.4s ease;
         }
         .nav--solid {
           background: rgba(28,28,24,1);
@@ -250,7 +252,7 @@ export default function Home() {
         }
 
         @media (max-width: 640px) {
-          .nav { padding: 1rem 1rem; }
+          .nav { padding: calc(1rem + env(safe-area-inset-top, 0px)) 1rem 1rem; }
           .hero { min-height: auto; height: auto; }
           .hero__video { position: relative; height: auto; aspect-ratio: auto; }
           .hero__countdown { gap: 0.75rem; }
