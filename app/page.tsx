@@ -48,8 +48,7 @@ export default function Home() {
           transition: background 0.4s ease, backdrop-filter 0.4s ease;
         }
         .nav--solid {
-          background: rgba(28,28,24,0.92);
-          backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+          background: rgba(28,28,24,1);
         }
         .nav__top {
           font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 500;
