@@ -321,7 +321,7 @@ export default function Home() {
       </section>
 
       <section className="intro">
-        <p className="intro__eyebrow">Preorder Now &mdash; Ships Summer 2025</p>
+        <p className="intro__eyebrow">Preorder Now &mdash; Ships Summer 2026</p>
         <h1 className="intro__title">The Chef Polo.</h1>
         <p className="intro__body">
           A chef-coat closure on a golf polo. The discipline of the kitchen meets
