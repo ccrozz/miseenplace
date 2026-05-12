@@ -44,24 +44,31 @@ export default function Home() {
     <>
       <style>{`
         .nav {
-          position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-          padding: calc(1.25rem + env(safe-area-inset-top, 0px)) 2rem 1.25rem;
+          position: fixed; top: 0; left: 0; right: 0; z-index: 10000;
+          padding: calc(1.25rem + env(safe-area-inset-top, 0px)) calc(2rem + env(safe-area-inset-right, 0px)) 1.25rem calc(2rem + env(safe-area-inset-left, 0px));
           display: flex; justify-content: center; align-items: center;
-          transition: background 0.4s ease;
+          transition: background 0.35s ease;
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
         }
-        .nav--solid {
-          background: rgba(28,28,24,1);
-        }
+        .nav--solid .nav__top { color: var(--color-charcoal); text-shadow: none; }
+        .nav--solid .nav__divider { background: rgba(45,45,45,0.3); }
+        .nav--solid .nav__bottom { color: var(--color-charcoal); text-shadow: none; }
         .nav__top {
           font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 500;
           letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-cream);
+          text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+          transition: color 0.35s ease, text-shadow 0.35s ease;
         }
         .nav__divider {
           width: 32px; height: 1px; background: rgba(249,247,242,0.35); margin: 3px auto;
+          transition: background 0.35s ease;
         }
         .nav__bottom {
           font-family: var(--font-serif); font-size: 1.25rem; font-style: italic;
           font-weight: 300; letter-spacing: 0.05em; color: var(--color-cream);
+          text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+          transition: color 0.35s ease, text-shadow 0.35s ease;
         }
 
         .hero {
@@ -252,7 +259,7 @@ export default function Home() {
         }
 
         @media (max-width: 640px) {
-          .nav { padding: calc(1rem + env(safe-area-inset-top, 0px)) 1rem 1rem; }
+          .nav { padding: calc(1rem + env(safe-area-inset-top, 0px)) calc(1rem + env(safe-area-inset-right, 0px)) 1rem calc(1rem + env(safe-area-inset-left, 0px)); }
           .hero { min-height: auto; height: auto; }
           .hero__video { position: relative; height: auto; aspect-ratio: auto; }
           .hero__countdown { gap: 0.75rem; }
